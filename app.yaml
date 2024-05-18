@@ -1,12 +1,10 @@
-runtime: python311
+runtime: python311  # 使用するPythonのバージョン
+entrypoint: gunicorn -b :$PORT wsgi:app
 
-entrypoint: gunicorn -b :$PORT app:app
+# 必要なライブラリをインストールするための設定
+env_variables:
+  FLASK_ENV: production
 
 handlers:
 - url: /.*
   script: auto
-
-env_variables:
-  FLASK_ENV: 'production'
-  SECRET_KEY: 'your-secret-key'
-  DATABASE_URL: 'your-database-url'

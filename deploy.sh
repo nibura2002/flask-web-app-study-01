@@ -14,24 +14,19 @@ EXPECTED_STATUS_CODE=$2 # 200 for http
 echo "Initializing Poetry environment..."
 poetry install
 
-# FlaskとGunicornを追加
-echo "Adding Flask and Gunicorn..."
-poetry add flask gunicorn
-
 # requirements.txtを生成
 echo "Exporting requirements to requirements.txt..."
 poetry export -f requirements.txt --output requirements.txt --without-hashes
 
 # ローカル環境でのテスト
 echo "Testing application locally..."
-poetry run gunicorn -b :8080 app:app &
-GUNICORN_PID=$!
+poetry run python wsgi.py &
 
 # 少し待ってアプリケーションが起動するのを待つ
 sleep 5
 
 # ローカルでのテスト結果を確認
-ACTUAL_STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8080)
+ACTUAL_STATUS_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8000)
 
 if [ "$ACTUAL_STATUS_CODE" -eq "$EXPECTED_STATUS_CODE" ]; then
   echo "Local test passed with status code $ACTUAL_STATUS_CODE."

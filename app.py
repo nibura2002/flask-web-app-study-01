@@ -33,7 +33,7 @@ def create_app():
     def load_user(user_id):
         return User.query.get(int(user_id))
 
-    # ルートの定義
+    # メインルートの定義
     @app.route('/')
     def index():
         return "Hello, World!"

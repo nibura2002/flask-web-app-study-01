@@ -51,3 +51,6 @@ venv.bak/
 
 # Poetry
 poetry.lock
+
+# Others
+*.DS_Store

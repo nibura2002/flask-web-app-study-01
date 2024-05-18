@@ -36,7 +36,7 @@ def create_app():
     # メインルートの定義
     @app.route('/')
     def index():
-        return "Hello, World!"
+        return render_template('index.html')
 
     @app.route('/dashboard')
     @login_required

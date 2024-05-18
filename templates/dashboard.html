@@ -1,14 +1,14 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-</head>
-<body>
-    <h1>Dashboard</h1>
-    <p>Welcome, {{ username }}!</p>
-    <p>This page requires you to be logged in.</p>
-    <a href="{{ url_for('auth.logout') }}">Logout</a>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-body">
+            <h1 class="card-title">Dashboard</h1>
+            <p class="card-text">Welcome, {{ username }}!</p>
+            <p class="card-text">This page requires you to be logged in.</p>
+            <a class="btn btn-danger" href="{{ url_for('auth.logout') }}">Logout</a>
+        </div>
+    </div>
+{% endblock %}
